@@ -25,5 +25,5 @@ async function renderTitle () {
 }
 
 
-renderTitle();
+setTimeout(renderTitle, 2000)
 
