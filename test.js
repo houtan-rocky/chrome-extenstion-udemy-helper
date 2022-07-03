@@ -16,15 +16,13 @@ async function getCourseDataFromServer(id) {
 // !
 
 async function renderTitle() {
-	const id = document.body.getAttribute(`data-clp-course-id`);
+	let id = document.body.getAttribute(`data-clp-course-id`);
 	const courseData = await getCourseDataFromServer(id);
 	const creationDateTime = new Date(courseData["created"]);
 	const creationDate = creationDateTime.toLocaleDateString();
 	const courseTitle = document.querySelector('[data-purpose="lead-title"]');
-	console.log(courseTitle);
 	courseTitle.innerHTML += "<br> Creation Date: " + creationDate;
 }
 
-setTimeout(() => {
-	renderTitle();
-}, 2000);
+alert("hi");
+renderTitle();
