@@ -11,7 +11,8 @@
 	"content_scripts": [
 		{
 			"matches": ["https://*.udemy.com/course/*"],
-			"js": ["app.js"]
+			"js": ["./js/content-scripts/server.js", "./js/content-scripts/app.js"],
+			"run_at": "document_end"
 		}
 	]
 }
