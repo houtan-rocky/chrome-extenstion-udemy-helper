@@ -1,4 +1,4 @@
-# Course Creation Date Finder on Udemy
+# Udemy helper
 
 On the Udemy website, there is no information on the creation date of a course.
 Despite the fact that the course was last updated, its age and the fact that the upgrade was so minimal may mean that it is no longer useful.
