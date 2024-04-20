@@ -4,14 +4,18 @@
 	"description": "udemy find out course details",
 	"manifest_version": 3,
 	"author": "Hootan Rocky",
+	"background": {
+    "service_worker": "background.ts",
+    "type": "module"
+  },
 	"action": {
-		"default_popup": "index.html",
+		"default_popup": "./public/index.html",
 		"default_title": "Course details"
 	},
 	"content_scripts": [
 		{
 			"matches": ["https://*.udemy.com/course/*"],
-			"js": ["./js/content-scripts/server.js", "./js/content-scripts/app.js"],
+			"js": ["./src/app.js"],
 			"run_at": "document_end"
 		}
 	]
