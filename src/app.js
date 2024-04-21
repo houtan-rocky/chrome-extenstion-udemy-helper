@@ -1,3 +1,5 @@
 export function App() {
-  return <h1>Hello world from the</h1>;
+return <div style={{ height: "20rem", width: "20rem"}}>
+    <h1>teeest</h1>
+  </div>
 }
