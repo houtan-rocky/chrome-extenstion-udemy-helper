@@ -5,17 +5,17 @@
 	"manifest_version": 3,
 	"author": "Hootan Rocky",
 	"background": {
-    "service_worker": "background.ts",
+    "service_worker": "./src/background.ts",
     "type": "module"
   },
 	"action": {
-		"default_popup": "./public/index.html",
+		"default_popup": "./src/index.html",
 		"default_title": "Course details"
 	},
 	"content_scripts": [
 		{
 			"matches": ["https://*.udemy.com/course/*"],
-			"js": ["./src/app.js"],
+			"js": ["./src/creation-date.js"],
 			"run_at": "document_end"
 		}
 	]
