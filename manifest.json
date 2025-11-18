@@ -1,16 +1,26 @@
 {
-	"name": "Udemy Helper",
-	"version": "1.0.0",
-	"description": "udemy find out course details",
+	"name": "Udemy Course Insights",
+	"version": "2.0.0",
+	"description": "See when Udemy courses were originally created, not just when they were last updated. Make informed learning decisions.",
 	"manifest_version": 3,
 	"author": "Hootan Rocky",
+	"icons": {
+		"16": "./icons/icon16.png",
+		"48": "./icons/icon48.png",
+		"128": "./icons/icon128.png"
+	},
 	"background": {
-    "service_worker": "./src/background.ts",
-    "type": "module"
-  },
+		"service_worker": "./src/background.js",
+		"type": "module"
+	},
 	"action": {
 		"default_popup": "./src/index.html",
-		"default_title": "Course details"
+		"default_title": "Udemy Course Insights",
+		"default_icon": {
+			"16": "./icons/icon16.png",
+			"48": "./icons/icon48.png",
+			"128": "./icons/icon128.png"
+		}
 	},
 	"content_scripts": [
 		{
@@ -18,5 +28,11 @@
 			"js": ["./src/creation-date.js"],
 			"run_at": "document_end"
 		}
+	],
+	"host_permissions": [
+		"https://*.udemy.com/*"
+	],
+	"permissions": [
+		"tabs"
 	]
 }

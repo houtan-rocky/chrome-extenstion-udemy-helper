@@ -1,0 +1,60 @@
+═══════════════════════════════════════════════════════════════
+  HOW TO LOAD THE CHROME EXTENSION - READ THIS FIRST!
+═══════════════════════════════════════════════════════════════
+
+⚠️  CRITICAL: You MUST load from the "dist" folder, NOT the root folder!
+
+═══════════════════════════════════════════════════════════════
+STEP-BY-STEP INSTRUCTIONS:
+═══════════════════════════════════════════════════════════════
+
+1. BUILD THE EXTENSION (if you haven't already):
+   Open terminal in this folder and run:
+   → yarn build
+
+2. OPEN CHROME EXTENSIONS PAGE:
+   → Type in address bar: chrome://extensions/
+   → Press Enter
+
+3. ENABLE DEVELOPER MODE:
+   → Toggle the "Developer mode" switch (top right)
+
+4. REMOVE OLD VERSION (if exists):
+   → Find "Udemy Course Insights" 
+   → Click the trash/remove icon
+
+5. LOAD THE EXTENSION:
+   → Click "Load unpacked" button
+   → Navigate to: C:\Repos\chrome-extenstion-udemy-helper
+   → Open the "dist" folder
+   → Click "Select Folder" (make sure you're INSIDE the dist folder)
+
+6. VERIFY YOU'RE IN THE RIGHT FOLDER:
+   When you select the folder, you should see these files:
+   ✓ manifest.json
+   ✓ background.5e0e441b.js
+   ✓ chrome-extenstion-udemy-helper.eeabe382.html
+   ✓ chrome-extenstion-udemy-helper.82c43382.js
+   ✓ creation-date.9d8be4cf.js
+   ✓ README.txt
+
+   ❌ If you see "src" folder or "package.json", you're in the WRONG folder!
+
+═══════════════════════════════════════════════════════════════
+TROUBLESHOOTING:
+═══════════════════════════════════════════════════════════════
+
+Error: "Failed to load module script"
+→ You loaded from the ROOT folder instead of the DIST folder
+→ Solution: Remove extension and reload from "dist" folder
+
+Extension not appearing:
+→ Make sure you ran "yarn build" first
+→ Make sure you selected the "dist" folder (not parent folder)
+
+Changes not showing:
+→ Run "yarn build" again
+→ Click the reload button on the extension card in Chrome
+
+═══════════════════════════════════════════════════════════════
+

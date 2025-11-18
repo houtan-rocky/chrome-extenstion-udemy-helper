@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marquee Promo Tile - 1400x560</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1400px;
+            height: 560px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #5624d0 0%, #764ba2 100%);
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 60px 80px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .left-section {
+            flex: 1;
+        }
+        
+        .icon-large {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        .icon-inner {
+            width: 90px;
+            height: 90px;
+            background: #5624d0;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .icon-inner::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 60px;
+            height: 40px;
+            background: white;
+            border-radius: 4px;
+        }
+        
+        .icon-inner::after {
+            content: '';
+            position: absolute;
+            top: 22px;
+            left: 22px;
+            width: 46px;
+            height: 5px;
+            background: #5624d0;
+            border-radius: 2px;
+        }
+        
+        .dots {
+            position: absolute;
+            top: 35px;
+            left: 28px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #5624d0;
+            border-radius: 50%;
+        }
+        
+        .title {
+            font-size: 56px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px 24px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-title {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .feature-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .right-section {
+            width: 500px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        
+        .preview-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        
+        .preview-item {
+            padding: 16px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 3px solid #5624d0;
+        }
+        
+        .preview-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+        
+        .preview-badge {
+            display: inline-block;
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="icon-large">
+                <div class="icon-inner">
+                    <div class="dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="title">Udemy Course Insights</div>
+            <div class="subtitle">Discover when courses were originally created, not just when they were last updated</div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-title">Real Dates</div>
+                    <div class="feature-desc">See original creation dates</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Smart Decisions</div>
+                    <div class="feature-desc">Choose up-to-date content</div>
+                </div>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="preview-title">See it in action</div>
+            <div class="preview-item">
+                <div class="preview-item-title">Complete Web Development Bootcamp</div>
+                <div class="preview-badge">Real Creation Date: March 15, 2023</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-item-title">Python for Data Science</div>
+                <div class="preview-badge">Real Creation Date: January 8, 2024</div>
+            </div>
+            <div class="preview-item">
+                <div class="preview-item-title">React - The Complete Guide</div>
+                <div class="preview-badge">Real Creation Date: November 22, 2022</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

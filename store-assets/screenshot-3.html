@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot 3 - 640x400</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 640px;
+            height: 400px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .browser-chrome {
+            width: 100%;
+            height: 32px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            gap: 8px;
+        }
+        
+        .browser-button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .browser-button.red { background: #ff5f57; }
+        .browser-button.yellow { background: #ffbd2e; }
+        .browser-button.green { background: #28ca42; }
+        
+        .browser-url {
+            flex: 1;
+            height: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .page-content {
+            width: 100%;
+            height: calc(100% - 32px);
+            background: white;
+            overflow-y: auto;
+        }
+        
+        .course-header {
+            background: #1c1d1f;
+            padding: 24px 20px;
+            color: white;
+        }
+        
+        .course-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .creation-date-badge {
+            display: inline-block;
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        
+        .course-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            font-size: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .rating {
+            color: #f3ca8c;
+            font-weight: 600;
+        }
+        
+        .stat-text {
+            color: #6a6f73;
+        }
+        
+        .course-content {
+            padding: 24px 20px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1c1d1f;
+        }
+        
+        .learning-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        
+        .check-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #5624d0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="browser-chrome">
+        <div class="browser-button red"></div>
+        <div class="browser-button yellow"></div>
+        <div class="browser-button green"></div>
+        <div class="browser-url">udemy.com/course/python-for-data-science/</div>
+    </div>
+    
+    <div class="page-content">
+        <div class="course-header">
+            <div class="course-title">Python for Data Science and Machine Learning</div>
+            <div class="creation-date-badge">Real Creation Date: January 8, 2024</div>
+            <div class="course-stats">
+                <div class="stat">
+                    <span class="rating">4.6</span>
+                    <span class="stat-text">(2.1k reviews)</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-text">12.5 hours</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="course-content">
+            <div class="section-title">What you'll learn</div>
+            <div class="learning-item">
+                <div class="check-icon">✓</div>
+                <span>Data analysis with Pandas</span>
+            </div>
+            <div class="learning-item">
+                <div class="check-icon">✓</div>
+                <span>Machine Learning algorithms</span>
+            </div>
+            <div class="learning-item">
+                <div class="check-icon">✓</div>
+                <span>Data visualization</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
