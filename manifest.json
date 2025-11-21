@@ -1,6 +1,6 @@
 {
 	"name": "Udemy Course Insights",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "See when Udemy courses were originally created, not just when they were last updated. Make informed learning decisions.",
 	"manifest_version": 3,
 	"author": "Hootan Rocky",
