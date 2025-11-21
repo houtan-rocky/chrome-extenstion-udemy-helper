@@ -9,17 +9,26 @@ if (!fs.existsSync(iconsDir)) {
   fs.mkdirSync(iconsDir);
 }
 
-// SVG icon template - simple calendar/date icon with Udemy purple theme
+// SVG icon template - bold "U" letter to match store asset design
 const iconSVG = (size) => `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-  <rect width="${size}" height="${size}" rx="${size * 0.15}" fill="#5624d0"/>
-  <rect x="${size * 0.15}" y="${size * 0.2}" width="${size * 0.7}" height="${size * 0.65}" rx="${size * 0.05}" fill="#ffffff" opacity="0.95"/>
-  <rect x="${size * 0.2}" y="${size * 0.3}" width="${size * 0.6}" height="${size * 0.08}" rx="${size * 0.02}" fill="#5624d0"/>
-  <circle cx="${size * 0.35}" cy="${size * 0.55}" r="${size * 0.08}" fill="#5624d0"/>
-  <circle cx="${size * 0.5}" cy="${size * 0.55}" r="${size * 0.08}" fill="#5624d0"/>
-  <circle cx="${size * 0.65}" cy="${size * 0.55}" r="${size * 0.08}" fill="#5624d0"/>
-  <circle cx="${size * 0.35}" cy="${size * 0.7}" r="${size * 0.08}" fill="#5624d0"/>
-  <circle cx="${size * 0.5}" cy="${size * 0.7}" r="${size * 0.08}" fill="#5624d0"/>
+  <defs>
+    <linearGradient id="bg-${size}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6a39df"/>
+      <stop offset="100%" stop-color="#4a1cb2"/>
+    </linearGradient>
+  </defs>
+  <rect width="${size}" height="${size}" rx="${size * 0.22}" fill="url(#bg-${size})"/>
+  <text
+    x="50%"
+    y="52%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="${size * 0.7}"
+    font-weight="700"
+    fill="#ffffff"
+  >U</text>
 </svg>`;
 
 // Generate PNG files for different sizes

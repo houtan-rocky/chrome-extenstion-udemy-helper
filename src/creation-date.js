@@ -104,7 +104,34 @@ function createSkeletonStyles() {
 // Flag to prevent multiple simultaneous executions
 let isRendering = false
 let retryCount = 0
-const MAX_RETRIES = 50 // Max 5 seconds of retries (50 * 100ms)
+const MAX_RETRIES = 100 // Max 50 seconds of retries (100 * 500ms)
+let domObserver = null
+
+function ensureDomObserver() {
+	if (domObserver || typeof MutationObserver === 'undefined') {
+		return
+	}
+
+	domObserver = new MutationObserver(() => {
+		const courseTitle = document.querySelector('[data-purpose="lead-title"]')
+		
+		if (!courseTitle) {
+			return
+		}
+
+		const existingBadge = courseTitle.querySelector('.udemy-creation-date')
+		const currentlyLoading = !!document.querySelector('.udemy-creation-date-loading')
+		
+		if (!existingBadge && !currentlyLoading && !isRendering) {
+			renderTitle()
+		}
+	})
+
+	domObserver.observe(document.body, {
+		childList: true,
+		subtree: true
+	})
+}
 
 async function renderTitle() {
 	// Prevent multiple simultaneous executions
@@ -119,7 +146,7 @@ async function renderTitle() {
 			// Retry after a short delay if element not found yet
 			if (retryCount < MAX_RETRIES) {
 				retryCount++
-				setTimeout(renderTitle, 100)
+				setTimeout(renderTitle, 500)
 			}
 			return
 		}
@@ -142,6 +169,7 @@ async function renderTitle() {
 		
 		// Create skeleton styles
 		createSkeletonStyles()
+		ensureDomObserver()
 		
 		// Create loading indicator with skeleton - show immediately
 		const loadingSpan = document.createElement('span')
@@ -208,8 +236,8 @@ async function renderTitle() {
 // Start rendering with a small delay to ensure page is stable
 if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', () => {
-		setTimeout(renderTitle, 300)
+		setTimeout(renderTitle, 500)
 	})
 } else {
-	setTimeout(renderTitle, 300)
+	setTimeout(renderTitle, 500)
 }
