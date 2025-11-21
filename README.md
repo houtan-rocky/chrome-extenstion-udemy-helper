@@ -29,8 +29,7 @@ On the Udemy website, there is no information on the creation date of a course. 
 5. Visit any Udemy course page to see the creation date!
 
 ## 📸 Screenshot
-
-![Course Creation Date Display](https://user-images.githubusercontent.com/62800782/236379147-12273eea-9e61-4d92-a21b-1670fe8e6a30.png)
+![Course Insidght Screenshot](https://github.com/user-attachments/assets/9618dd65-2a8e-4367-81e5-b295ed177049)
 
 ## 🛠️ Development
 
