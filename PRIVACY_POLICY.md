@@ -1,6 +1,6 @@
 # Privacy Policy for Udemy Course Insights
 
-**Last Updated:** 11/18/2025
+**Updated:** 11/18/2025
 ## Introduction
 
 Udemy Course Insights ("we", "our", or "the extension") is committed to protecting your privacy. This Privacy Policy explains how our Chrome extension handles information when you use it.
@@ -102,7 +102,7 @@ This extension is not intended for children under 13. We do not knowingly collec
 
 ## Changes to This Privacy Policy
 
-We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last Updated" date.
+We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Updated" date.
 
 ## Contact
 

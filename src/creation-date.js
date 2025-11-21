@@ -9,7 +9,7 @@ async function getCourseDataFromServer(id) {
 	
 	try {
 		const res = await fetch(
-			`${API_URL}/${id}/?fields[course]=created,title`,
+			`${API_URL}/${id}/?fields[course]=created,last_update_date,title`,
 			{
 				method: 'GET',
 				headers: {
@@ -45,12 +45,13 @@ async function getCourseDataFromServer(id) {
 // Fallback: Try to extract course data from the page itself
 async function tryExtractFromPage(id) {
 	// Look for course data in script tags or data attributes
-	const scripts = document.querySelectorAll('script[type="application/json"]')
+	const scripts = document.querySelectorAll('script[type="application/json"], script[type="application/ld+json"]')
 	for (const script of scripts) {
 		try {
 			const data = JSON.parse(script.textContent)
-			if (data && data.created) {
-				return { created: data.created }
+			const extracted = extractDatesFromUnknown(data)
+			if (extracted) {
+				return extracted
 			}
 		} catch (e) {
 			// Continue searching
@@ -58,11 +59,105 @@ async function tryExtractFromPage(id) {
 	}
 	
 	// Look for data in window object
-	if (window.udemy && window.udemy.course && window.udemy.course.created) {
-		return { created: window.udemy.course.created }
+	if (window.udemy && window.udemy.course) {
+		const extracted = extractDatesFromUnknown(window.udemy.course)
+		if (extracted) {
+			return extracted
+		}
+	}
+
+	// Meta tags (JSON-LD / schema)
+	const metaCreated = document.querySelector('meta[itemprop="datePublished"]')
+	const metaUpdated = document.querySelector('meta[itemprop="dateModified"]')
+	if (metaCreated || metaUpdated) {
+		return {
+			created: metaCreated ? metaCreated.getAttribute('content') : null,
+			last_update_date: metaUpdated ? metaUpdated.getAttribute('content') : null
+		}
+	}
+
+	// Visible "Last updated" text on the page
+	const lastUpdatedEl = document.querySelector('[data-purpose="last-update-date"]')
+	if (lastUpdatedEl) {
+		const parsed = parseDateFromText(lastUpdatedEl.textContent)
+		if (parsed) {
+			return { created: null, last_update_date: parsed }
+		}
 	}
 	
 	throw new Error('Could not extract course data from page')
+}
+
+function extractDatesFromUnknown(raw) {
+	if (!raw) {
+		return null
+	}
+
+	if (Array.isArray(raw)) {
+		for (const item of raw) {
+			const extracted = extractDatesFromUnknown(item)
+			if (extracted) {
+				return extracted
+			}
+		}
+		return null
+	}
+
+	if (typeof raw !== 'object') {
+		return null
+	}
+
+	const created =
+		raw.created ||
+		raw.published_time ||
+		raw.date_published ||
+		raw.datePublished ||
+		raw.initial_created ||
+		raw.dateCreated
+
+	const lastUpdate =
+		raw.last_update_date ||
+		raw.last_updated ||
+		raw.date_modified ||
+		raw.dateModified ||
+		raw.updated ||
+		raw.last_modified
+
+	if (created || lastUpdate) {
+		return {
+			created: created || null,
+			last_update_date: lastUpdate || null,
+			title: raw.title || raw.headline || raw.name || null
+		}
+	}
+
+	return null
+}
+
+function parseDateFromText(text) {
+	if (!text) {
+		return null
+	}
+	const cleaned = text.replace(/last\s*updated/i, '').trim()
+	if (!cleaned) {
+		return null
+	}
+	const parsedDate = new Date(cleaned)
+	if (isNaN(parsedDate.getTime())) {
+		return null
+	}
+	return parsedDate.toISOString()
+}
+
+function formatDateForDisplay(dateString) {
+	if (!dateString) {
+		return 'Not available'
+	}
+	const parsed = new Date(dateString)
+	if (isNaN(parsed.getTime())) {
+		return 'Not available'
+	}
+	return parsed.toLocaleDateString()
 }
 
 // Create CSS for skeleton/beam loader
@@ -172,26 +267,42 @@ async function renderTitle() {
 		ensureDomObserver()
 		
 		// Create loading indicator with skeleton - show immediately
-		const loadingSpan = document.createElement('span')
+		const loadingSpan = document.createElement('div')
 		loadingSpan.className = 'udemy-creation-date udemy-creation-date-loading'
-		loadingSpan.style.cssText = 'color: #0f5132; font-weight: 500; font-size: 0.9em; background-color: #d1e7dd; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 8px;'
-		
-		const labelText = document.createTextNode('Real Creation Date: ')
-		const skeleton = document.createElement('span')
-		skeleton.className = 'udemy-creation-date-skeleton'
-		
-		loadingSpan.appendChild(labelText)
-		loadingSpan.appendChild(skeleton)
-		
+		loadingSpan.style.cssText = 'color: #0f5132; font-weight: 500; font-size: 0.9em; background-color: #d1e7dd; padding: 6px 10px; border-radius: 6px; display: inline-block; margin-top: 8px; min-width: 200px;'
+
+		const creationRow = document.createElement('div')
+		creationRow.style.marginBottom = '4px'
+		const creationLabel = document.createElement('span')
+		creationLabel.textContent = 'Created: '
+		const creationSkeleton = document.createElement('span')
+		creationSkeleton.className = 'udemy-creation-date-skeleton'
+		creationRow.appendChild(creationLabel)
+		creationRow.appendChild(creationSkeleton)
+
+		const updatedRow = document.createElement('div')
+		const updatedLabel = document.createElement('span')
+		updatedLabel.textContent = 'Updated: '
+		const updatedSkeleton = document.createElement('span')
+		updatedSkeleton.className = 'udemy-creation-date-skeleton'
+		updatedRow.appendChild(updatedLabel)
+		updatedRow.appendChild(updatedSkeleton)
+
+		loadingSpan.appendChild(creationRow)
+		loadingSpan.appendChild(updatedRow)
+
 		courseTitle.appendChild(document.createElement('br'))
 		courseTitle.appendChild(loadingSpan)
 		
 		// Fetch course data
 		const courseData = await getCourseDataFromServer(id)
 		
+		const lastUpdatedDisplay = formatDateForDisplay(courseData && courseData.last_update_date)
+		
 		if (!courseData || !courseData.created) {
 			console.warn('Course data or creation date not available')
-			loadingSpan.textContent = 'Creation date unavailable'
+			creationRow.textContent = 'Creation date unavailable'
+			updatedRow.textContent = `Updated: ${lastUpdatedDisplay}`
 			loadingSpan.style.color = '#856404'
 			loadingSpan.style.backgroundColor = '#fff3cd'
 			isRendering = false
@@ -202,7 +313,8 @@ async function renderTitle() {
 		
 		if (isNaN(creationDateTime.getTime())) {
 			console.warn('Invalid creation date')
-			loadingSpan.textContent = 'Invalid creation date'
+			creationRow.textContent = 'Invalid creation date'
+			updatedRow.textContent = `Updated: ${lastUpdatedDisplay}`
 			loadingSpan.style.color = '#856404'
 			loadingSpan.style.backgroundColor = '#fff3cd'
 			isRendering = false
@@ -213,8 +325,8 @@ async function renderTitle() {
 		
 		// Replace skeleton with actual date
 		loadingSpan.className = 'udemy-creation-date'
-		loadingSpan.innerHTML = '' // Clear skeleton
-		loadingSpan.textContent = `Real Creation Date: ${creationDate}`
+		creationRow.textContent = `Created: ${creationDate}`
+		updatedRow.textContent = `Updated: ${lastUpdatedDisplay}`
 		loadingSpan.style.color = '#0f5132'
 		loadingSpan.style.backgroundColor = '#d1e7dd'
 		

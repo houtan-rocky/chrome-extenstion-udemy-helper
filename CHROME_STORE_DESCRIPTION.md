@@ -14,7 +14,7 @@ When browsing Udemy courses, you'll often see courses that were "updated" recent
 
 ## Key Features
 
-### Real Creation Date Display
+### Creation Date Display
 The extension automatically detects when you're viewing a Udemy course page and displays the original creation date in a clean, unobtrusive format. The creation date appears right below the course title, so you can see it at a glance without any extra clicks.
 
 ### Seamless Integration

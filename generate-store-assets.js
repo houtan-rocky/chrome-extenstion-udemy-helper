@@ -81,7 +81,7 @@ function createScreenshotSVG(width, height, title) {
   
   <!-- Creation date badge -->
   <rect x="${width * 0.05}" y="${isWide ? 150 : 115}" width="${width * 0.25}" height="${isWide ? 35 : 28}" rx="4" fill="${colors.light}"/>
-  <text x="${width * 0.07}" y="${isWide ? 172 : 135}" font-family="Arial, sans-serif" font-size="${isWide ? 14 : 12}" font-weight="500" fill="${colors.secondary}">Real Creation Date: ${isWide ? 'April 20, 2023' : '4/20/2023'}</text>
+  <text x="${width * 0.07}" y="${isWide ? 172 : 135}" font-family="Arial, sans-serif" font-size="${isWide ? 14 : 12}" font-weight="500" fill="${colors.secondary}">Creation Date: ${isWide ? 'April 20, 2023' : '4/20/2023'}</text>
   
   <!-- Course info section -->
   <rect x="${width * 0.05}" y="${isWide ? 260 : 200}" width="${width * 0.9}" height="${isWide ? 2 : 1}" fill="#d1d7dc"/>
@@ -107,7 +107,7 @@ function createScreenshotSVG(width, height, title) {
   <rect x="${width * 0.67}" y="${isWide ? 360 : 300}" width="260" height="120" rx="6" fill="#f9f9f9"/>
   <text x="${width * 0.67 + 10}" y="${isWide ? 385 : 325}" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#333">${title.substring(0, 40)}...</text>
   <rect x="${width * 0.67 + 10}" y="${isWide ? 410 : 350}" width="240" height="50" rx="4" fill="#e8f5e9" stroke="#c8e6c9" stroke-width="1"/>
-  <text x="${width * 0.67 + 20}" y="${isWide ? 430 : 370}" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#2e7d32">Real Creation Date</text>
+  <text x="${width * 0.67 + 20}" y="${isWide ? 430 : 370}" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#2e7d32">Creation Date</text>
   <text x="${width * 0.67 + 20}" y="${isWide ? 450 : 390}" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#388e3c">April 20, 2023</text>
   ` : ''}
 </svg>`;

@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- 🔍 **Real Creation Date Display**: See the original creation date of any Udemy course directly on the course page
+- 🔍 **Creation Date Display**: See the original creation date of any Udemy course directly on the course page
 - 🎯 **Informed Decisions**: Understand course age vs. last update date to choose the most relevant content
 - 🚀 **Seamless Integration**: Automatically displays creation dates on course pages without any manual action
 - 💎 **Beautiful UI**: Clean, modern interface that enhances your Udemy browsing experience

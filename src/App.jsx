@@ -9,7 +9,7 @@ async function getCourseDataFromServer(id) {
   
   try {
     const res = await fetch(
-      `${API_URL}/${id}/?fields[course]=created,title`,
+      `${API_URL}/${id}/?fields[course]=created,last_update_date,title`,
       {
         method: 'GET',
         headers: {
@@ -419,7 +419,7 @@ export function App() {
                         textTransform: "uppercase"
                       }}
                     >
-                      Real Creation Date
+                      Created
                     </span>
                     <span
                       style={{
@@ -443,6 +443,39 @@ export function App() {
                     }}
                   >
                     {formatDate(courseData.created)}
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "14px",
+                      paddingTop: "12px",
+                      borderTop: "1px solid rgba(15,81,50,0.12)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      flexWrap: "wrap"
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        letterSpacing: "0.04em",
+                        color: palette.muted,
+                        textTransform: "uppercase"
+                      }}
+                    >
+                      Updated
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: 600,
+                        color: palette.primary
+                      }}
+                    >
+                      {formatDate(courseData.last_update_date)}
+                    </span>
                   </div>
                 </div>
               </div>
